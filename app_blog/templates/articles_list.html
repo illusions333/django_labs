@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Публікації</title>
-    </head>
-    <body>
-        Публікації <br/>
-        {% if category %}
-            {{ category }}
-        {% endif %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    {% spaceless %}
+        <h1>Публікації</h1>
+        <br/>
+        {% if category %} {{ category }} {% endif %}
         {% for item in items %}
             <div class="articles-row">
                 <a href="{{ item.get_absolute_url }}">
@@ -21,11 +17,11 @@
                     {{ item.description|safe|escape|striptags|truncatewords_html:32 }}
                 </p>
                 <div class="container-image">
-                    <img class="img" src="{{ item.images.all.0.image.url }}" alt="" />
+                    <img class="img" src="{{ item.images.all.0.image.url }}" alt=""/>
                 </div>
                 <div class=‘clearfix’></div>
             </div>
         {% endfor %}
-        <a href="/" style="font-size: 20px; font-weight: bold;" >Головна</a>
-    </body>
-</html>
+        <a style="font-weight: bold; font-size: 20px;" href="/">На головну</a>
+    {% endspaceless %}
+{% endblock %}
